@@ -1,34 +1,65 @@
 ---
-title: "deno dash"
+title: "demo dash"
+runtime: shiny
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    theme: united
+    logo: coolpic.png
+    favicon: coolicon.png
+    social: menu
+    source_menu: https://makwhit6.github.io/dashboard_demo/
 ---
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(ggplot2)
+library(tidyverse)
+#install.packages("plotly")
+#install.packages("shiny")
+#install.packages("reactable")
+library(plotly)
+library(shiny)
+library(reactable)
 ```
+
+Page 1 {data-icon="fa-angellist"}
+============================
+Look at this plot I made!
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Vroom Vroom
 
 ```{r}
 
+plot1 <- mtcars %>%
+  ggplot(aes(wt, mpg, col = as_factor(cyl))) +
+  geom_point() +
+  facet_grid(~cyl)
+
+renderPlotly(plot1)
+
 ```
+
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Beep Beep
 
 ```{r}
 
+reactable(mtcars)
+
 ```
 
-### Chart C
+Page 2
+==========================
+
+### Honk Honk
 
 ```{r}
 
